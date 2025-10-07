@@ -1,54 +1,57 @@
-"use client";
-
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 interface TimelineItem {
-  year: string;
+  year?: string;
   title: string;
   description: string;
+  dates?: string;
   side: "left" | "right";
   expandedContent?: string;
 }
 
 const timelineData: TimelineItem[] = [
   {
-    year: "2015",
-    title: "Lychee v3",
-    description: "The third version of my photo-management-tool. Redesigned and partly rewritten.",
+    year: "Aug 2024",
+    title: "Fullstack Developer",
+    description: "DriveSmart",
+    dates: "Apr 2024 - Aug 2024",
+    side: "left",
+    // expandedContent: "Additional details about Lychee v3...",
+  },
+  {
+    title: "B.S Software Engineering",
+    description: "Western Govenors University",
+    dates: "May 2024 - Aug 2024",
+    side: "left",
+  },
+  {
+    year: "Apr 2024",
+    title: "Frontend Developer",
+    description: "DriveSmart",
+    dates: "Apr 2023 - Apr 2024",
     side: "right",
-    expandedContent: "Additional details about Lychee v3...",
   },
   {
-    year: "2015",
-    title: "basicPlaceholder",
-    description: "Custom, persistent placeholders for inputs. Written in Vanilla JS.",
+    year: "May 2022",
+    title: "Fullstack Developer",
+    description: "BayMaster",
+    dates: "Apr 2023 - Apr 2024",
+    side: "left",
+  },
+  {
+    year: "Dec 2021",
+    title: "Computer Sci Tutor",
+    description: "Ocean County College",
+    dates: "Sep 2019 - Dec 2021",
     side: "right",
+    // expandedContent: "More info about basicContext...",
   },
   {
-    year: "2014",
-    title: "HarpStart",
-    description: "A base for all everyday web projects.",
-    side: "left",
-  },
-  {
-    year: "2014",
-    title: "basicContext",
-    description: "Powerful context-menu for your website or webapp.",
-    side: "left",
-    expandedContent: "More info about basicContext...",
-  },
-  {
-    year: "2014",
-    title: "basicModal",
-    description: "Dialog system for modern web-apps.",
-    side: "left",
-  },
-  {
-    year: "2014",
-    title: "Ackee",
-    description: "Self-hosted website analytics tool. Track users and analyze data.",
-    side: "left",
+    title: "A.S Computer Science",
+    description: "Ocean County College",
+    dates: "Sep 2019 - Dec 2021",
+    side: "right",
   },
 ];
 
@@ -142,18 +145,11 @@ export default function Timeline() {
         <h2 className="text-3xl font-bold text-center mb-4 uppercase tracking-wider text-muted-foreground">About</h2>
         <div className="w-16 h-px bg-border mx-auto mb-8"></div>
 
-        <p className="text-center text-muted-foreground mb-16 max-w-2xl mx-auto">
-          My name is <strong>Your Name</strong> and I am a web developer and designer from{" "}
-          <strong>Your Location</strong>. If you enjoy my work, want to say hello or like to collaborate with me you can
-          contact me via{" "}
-          <a href="mailto:you@email.com" className="text-primary hover:underline">
-            Mail
-          </a>{" "}
-          or{" "}
-          <a href="https://twitter.com" className="text-primary hover:underline">
-            Twitter
-          </a>
-          .
+        <p className="text-center text-lg text-muted-foreground mb-16 max-w-2xl mx-auto">
+          I build <strong>full-stack</strong> applications with <strong>clean</strong>, <strong>clean</strong> code and
+          <strong>thoughtful architecture</strong>, prioritizing <strong>clarity</strong> and{" "}
+          <strong>functionality</strong> over design. When I’m not coding, I explore new frameworks, side projects, or
+          find ways to simplify workflows.
         </p>
 
         <div className="relative">
