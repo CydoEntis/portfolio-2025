@@ -1,4 +1,4 @@
-import { Timeline } from "@/components/TimeLine";
+import { Timeline } from "@/components/TimeLineOld";
 import SectionTitle from "@/components/SectionTitle";
 import { University } from "lucide-react";
 import { education } from "../data/education";

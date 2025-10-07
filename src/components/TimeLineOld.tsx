@@ -1,16 +1,16 @@
 import { Card } from "./ui/card";
 
-interface TimelineItem {
+interface TimelineOldItem {
   date: string;
   title: string;
   content?: string;
 }
 
-interface TimelineProps {
-  items: TimelineItem[];
+interface TimelineOldProps {
+  items: TimelineOldItem[];
 }
 
-export function Timeline({ items }: TimelineProps) {
+export function TimelineOld({ items }: TimelineOldProps) {
   return (
     <div className="w-full px-4 py-8">
       <ol className="relative space-y-8 ml-3 before:absolute before:-ml-px before:h-full before:w-0.5 before:rounded-full before:bg-muted-foreground/30">

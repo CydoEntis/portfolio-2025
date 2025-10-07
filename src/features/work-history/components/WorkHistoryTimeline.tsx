@@ -1,4 +1,4 @@
-import { Timeline } from "@/components/TimeLine";
+import { Timeline } from "@/components/TimeLineOld";
 import { workHistoryData } from "../data/workHistory";
 import SectionTitle from "@/components/SectionTitle";
 import { BriefcaseBusiness } from "lucide-react";
