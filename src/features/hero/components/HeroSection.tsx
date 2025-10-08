@@ -8,7 +8,7 @@ import FloatingTech from "@/features/tools/components/FloatingTech";
 
 function HeroSection() {
   return (
-    <div className="relative  flex flex-col items-center justify-center px-4 py-12 md:py-20">
+    <section id="hero" className="relative  flex flex-col items-center justify-center px-4 py-24 md:py-32">
       <GridBackground />
       <RadialFadeOverlay />
       <FloatingTech />
@@ -34,7 +34,7 @@ function HeroSection() {
           <HeroActions />
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

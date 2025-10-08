@@ -2,7 +2,7 @@ import { ContactForm } from "./ContactForm";
 
 function ContactSection() {
   return (
-    <section className="py-12 md:py-20 px-4 border-t border-primary/20">
+    <section id="contact" className="py-12 md:py-20 px-4 border-t border-primary/20">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-2 gap-8 md:gap-12">
           <div>
