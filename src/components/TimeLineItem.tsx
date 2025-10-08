@@ -1,15 +1,3 @@
-interface TimelineEntry {
-  title: string;
-  location: string;
-  dates: string;
-  side: "left" | "right";
-}
-
-interface TimelineItem {
-  year: string;
-  entries: TimelineEntry[];
-}
-
 interface TimelineItemProps {
   item: TimelineItem;
 }
@@ -18,16 +6,21 @@ function TimelineItem({ item }: TimelineItemProps) {
   return (
     <div className="relative flex flex-col md:flex-row items-start mb-8 transition-all duration-300 ease-in-out">
       {/* Mobile layout - stacked */}
-      <div className="md:hidden w-full space-y-4 mb-6">
-        {/* Year */}
-        <div className="flex items-center gap-3">
-          <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary opacity-75 animate-ping"></span>
-          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary"></span>
+      <div className="md:hidden w-full space-y-4 mb-6 relative">
+        {/* Vertical line for mobile - centered on dot */}
+        <div className="absolute left-[9px] top-3 bottom-0 w-px bg-primary/30"></div>
+
+        {/* Year with dot */}
+        <div className="flex items-center gap-3 relative z-10">
+          <div className="relative w-5 h-5 flex items-center justify-center flex-shrink-0">
+            <span className="absolute inline-flex h-2.5 w-2.5 rounded-full bg-primary opacity-75 animate-ping"></span>
+            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary"></span>
+          </div>
           <span className="text-sm font-semibold text-muted-foreground">{item.year}</span>
         </div>
 
         {/* All entries stacked */}
-        <div className="space-y-4 pl-6">
+        <div className="space-y-4 pl-8">
           {item.entries.map((entry, index) => (
             <div key={index}>
               <div className="transition-all duration-300 ease-in-out">
@@ -41,7 +34,7 @@ function TimelineItem({ item }: TimelineItemProps) {
         </div>
       </div>
 
-      {/* Desktop layout -  two-column */}
+      {/* Desktop layout - two-column */}
       <div className="hidden md:flex w-full items-start">
         {/* Left content */}
         <div className="w-5/12 pr-8 text-right">
