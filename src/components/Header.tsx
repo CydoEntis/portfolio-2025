@@ -35,14 +35,14 @@ export default function Header() {
           </button>
         ))}
 
-        <ThemeToggle />
-
         <button
           onClick={() => handleNavClick("contact")}
           className="ml-6 px-4 py-2 bg-primary/10 border border-primary/20 text-foreground rounded-sm justify-center flex items-center gap-2 hover:bg-primary/90 transition"
         >
           Get In Touch <Send size={16} />
         </button>
+        
+        <ThemeToggle />
       </div>
 
       <Sheet open={open} onOpenChange={setOpen}>
