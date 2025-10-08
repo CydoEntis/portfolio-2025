@@ -5,6 +5,7 @@ import RadialFadeOverlay from "@/components/RadialFadeOverlay";
 import HeroImageContainer from "./HeroImageContainer";
 import HeroActions from "./HeroActions";
 import FloatingTech from "@/features/tools/components/FloatingTech";
+import HeroTitle from "./HeroTitle";
 
 function HeroSection() {
   return (
@@ -19,9 +20,7 @@ function HeroSection() {
         </HeroImageContainer>
 
         <div className="relative -top-12 md:-top-25 w-full px-4">
-          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
-            Hey, I'm Cody Stine.
-          </h1>
+          <HeroTitle />
 
           <h2 className=" text-xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-center mb-6 md:mb-8 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
             Full stack Developer

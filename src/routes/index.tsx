@@ -32,7 +32,7 @@ function App() {
         <ProjectSection />
       </AnimateOnScroll>
 
-      <AnimateOnScroll delay={500}>
+      <AnimateOnScroll delay={400}>
         <ContactSection />
       </AnimateOnScroll>
 
