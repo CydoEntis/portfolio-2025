@@ -6,6 +6,7 @@ import AboutSection from "@/features/about/components/AboutSection";
 import ProjectSection from "@/features/projects/components/ProjectSection";
 import ContactSection from "@/features/contact/components/ContactSection";
 import Socials from "@/features/socials/components/Socials";
+import ToolsSection from "@/features/tools/components/ToolsSection";
 
 export const Route = createFileRoute("/")({
   component: App,
@@ -23,10 +24,14 @@ function App() {
       </AnimateOnScroll>
 
       <AnimateOnScroll delay={300}>
-        <ProjectSection />
+        <ToolsSection />
       </AnimateOnScroll>
 
       <AnimateOnScroll delay={400}>
+        <ProjectSection />
+      </AnimateOnScroll>
+
+      <AnimateOnScroll delay={500}>
         <ContactSection />
       </AnimateOnScroll>
 
