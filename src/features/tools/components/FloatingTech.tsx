@@ -9,16 +9,28 @@ interface FloatingTech {
   delay: number;
 }
 
+const techPositions = [
+  { x: 25, y: 10 }, // Top left
+  { x: 15, y: 30 }, // Mid left upper
+  { x: 10, y: 50 }, // Mid left lower
+  { x: 10, y: 65 }, // Bottom left
+  { x: 20, y: 85 }, // Bottom left corner
+  { x: 75, y: 10 }, // Top right
+  { x: 85, y: 30 }, // Mid right upper
+  { x: 90, y: 50 }, // Mid right lower
+  { x: 90, y: 65 }, // Bottom right
+  { x: 80, y: 85 }, // Bottom right corner
+];
+
 function FloatingTech() {
   const [techs, setTechs] = useState<FloatingTech[]>([]);
 
   useEffect(() => {
-    // Generate random positions for each tech
     const floatingTechs = technologies.map((tech, index) => ({
       name: tech,
-      x: Math.random() * 80 + 10, // 10-90% from left
-      y: Math.random() * 70 + 15, // 15-85% from top
-      delay: index * 0.2, // Stagger the appearance
+      x: techPositions[index % techPositions.length].x,
+      y: techPositions[index % techPositions.length].y,
+      delay: index * 0.2,
     }));
     setTechs(floatingTechs);
   }, []);
@@ -28,7 +40,7 @@ function FloatingTech() {
       {techs.map((tech) => (
         <div
           key={tech.name}
-          className="absolute animate-float-up"
+          className="absolute animate-float-up opacity-0"
           style={{
             left: `${tech.x}%`,
             top: `${tech.y}%`,
@@ -38,14 +50,14 @@ function FloatingTech() {
           <Badge
             variant="secondary"
             className="
-              bg-zinc-900/80 backdrop-blur-sm text-zinc-300 
-              border border-zinc-700/50 shadow-lg 
+              bg-primary/10 backdrop-blur-sm text-foreground 
+              border border-primary/20 shadow-lg 
               animate-gentle-bounce
               pointer-events-auto hover:scale-110 transition-transform
               text-base md:text-lg px-4 py-2 font-semibold
             "
             style={{
-              animationDelay: `${tech.delay + 1.5}s`, // Start bouncing after float-up finishes
+              animationDelay: `${tech.delay + 1.5}s`,
             }}
           >
             {tech.name}
