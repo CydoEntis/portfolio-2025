@@ -3,6 +3,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import HeroSection from "@/features/hero/components/HeroSection";
 import AnimateOnScroll from "@/components/AnimateOnScroll";
 import AboutSection from "@/features/about/components/AboutSection";
+import ProjectSection from "@/features/projects/components/ProjectSection";
+import ContactSection from "@/features/contact/components/ContactSection";
 
 export const Route = createFileRoute("/")({
   component: App,
@@ -19,24 +21,13 @@ function App() {
         <AboutSection />
       </AnimateOnScroll>
 
-      {/* 
-      <AnimateOnScroll delay={200}>
-        <section className="grid grid-cols-1 lg:grid-cols-2">
-          <div className="p-2 md:p-4">
-            <WorkHistoryTimeline />
-          </div>
-          <div className="p-2 md:p-4">
-            <EducationTimeline />
-          </div>
-        </section>
+      <AnimateOnScroll delay={300}>
+        <ProjectSection />
       </AnimateOnScroll>
 
-      <AnimateOnScroll delay={300}>
-        <section className="p-2 md:p-4 space-y-8">
-          <TechnologyToolbelt />
-          <Projects />
-        </section>
-      </AnimateOnScroll> */}
+      <AnimateOnScroll delay={400}>
+        <ContactSection />
+      </AnimateOnScroll>
     </main>
   );
 }

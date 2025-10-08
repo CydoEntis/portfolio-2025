@@ -1,59 +1,63 @@
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Github, ArrowRight } from "lucide-react";
+import type { Project } from "../types";
 
 interface ProjectCardProps {
-  name: string;
-  description: string;
-  image?: string;
-  liveUrl?: string;
-  githubUrl?: string;
+  project: Project;
+  isReversed: boolean;
 }
 
-export function ProjectCard({ name, description, image, liveUrl, githubUrl }: ProjectCardProps) {
+export function ProjectCard({ project, isReversed }: ProjectCardProps) {
   return (
-    <Card
-      className="
-        relative group overflow-hidden rounded-xl border border-primary/20
-        bg-primary/5 hover:bg-primary/20
-        transition-all duration-500 ease-in-out
-        h-64 flex items-center justify-center text-center
-      "
-    >
-      <h3
-        className="
-          text-2xl font-semibold text-white z-10
-          transition-opacity duration-300
-          group-hover:opacity-0
-        "
-      >
-        {name}
-      </h3>
+    <div className={`grid md:grid-cols-2 gap-8 items-center mb-24 ${isReversed ? "md:grid-flow-dense" : ""}`}>
+      <div className={`space-y-4 ${isReversed ? "md:col-start-2" : ""}`}>
+        <div className="relative aspect-video rounded-lg overflow-hidden border border-zinc-800">
+          <img src={project.image} alt={project.name} className="w-full h-full object-cover" />
+        </div>
+        {project.codeImage && (
+          <div className="relative aspect-video rounded-lg overflow-hidden bg-zinc-900 border border-zinc-800">
+            <img src={project.codeImage} alt={`${project.name} code`} className="w-full h-full object-cover" />
+          </div>
+        )}
+      </div>
 
-      <div
-        className="
-          absolute inset-0 flex flex-col items-center justify-center text-center
-          opacity-0 group-hover:opacity-100 transition-opacity duration-500
-          z-10 px-4
-        "
-      >
-        <p className="text-sm text-white/90 mb-4 max-w-sm">{description}</p>
-        <div className="flex gap-2">
-          {liveUrl && (
-            <Button asChild className="bg-white/10 hover:bg-white/20 border border-white/30 text-white rounded-sm">
-              <a href={liveUrl} target="_blank" rel="noopener noreferrer">
-                View Project
+      <div className={isReversed ? "md:col-start-1 md:row-start-1" : ""}>
+        <h3 className="text-3xl font-bold text-white mb-4">{project.name}</h3>
+
+        <div className="flex flex-wrap gap-2 mb-4">
+          {project.tech.map((tag) => (
+            <Badge key={tag} variant="secondary" className="bg-primary/10 text-foreground border border-primary/20">
+              {tag}
+            </Badge>
+          ))}
+        </div>
+
+        <p className="text-zinc-400 leading-relaxed mb-6">{project.description}</p>
+
+        <div className="flex gap-3">
+          {project.githubUrl && (
+            <Button
+              asChild
+              size="lg"
+              className="bg-primary/10 border border-primary/20 hover:bg-primary/20 text-foreground"
+            >
+              <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                <Github className="w-4 h-4 mr-2" />
+                View GitHub
               </a>
             </Button>
           )}
-          {githubUrl && (
-            <Button asChild className="bg-white/10 hover:bg-white/20 border border-white/30 text-white rounded-sm">
-              <a href={githubUrl} target="_blank" rel="noopener noreferrer">
-                View GitHub
+          {project.liveUrl && (
+            <Button asChild size="lg" variant="outline" className="border-zinc-700 text-zinc-300 hover:bg-zinc-800">
+              <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                View project
+                <ArrowRight className="w-4 h-4 ml-2" />
               </a>
             </Button>
           )}
         </div>
       </div>
-    </Card>
+    </div>
   );
 }
