@@ -1,7 +1,6 @@
 import Socials from "@/features/socials/components/Socials";
 import ProfilePic from "../../../../public/portfolio-pic.png";
 import HeroImage from "./HeroImage";
-import Timeline from "@/components/TimeLineItem";
 import GridBackground from "@/components/GridBackground";
 import RadialFadeOverlay from "@/components/RadialFadeOverlay";
 import HeroImageContainer from "./HeroImageContainer";
@@ -28,8 +27,9 @@ function HeroSection() {
           </h2>
 
           <p className="text-lg md:text-xl text-center text-muted-foreground max-w-2xl mb-4">
-            I'm a <strong>Developer</strong> crafting <strong>minimal</strong>, effortless web{" "}
-            <strong>experiences</strong> that just <strong>work</strong>.
+            I'm a <span className="font-semibold text-secondary">Developer</span> crafting{" "}
+            <span className="font-semibold text-secondary">minimal, effortless web experiences</span> that just{" "}
+            <span className="font-semibold text-secondary underline">work</span>.
           </p>
 
           <div className="space-y-8">
