@@ -5,6 +5,7 @@ import AnimateOnScroll from "@/components/AnimateOnScroll";
 import AboutSection from "@/features/about/components/AboutSection";
 import ProjectSection from "@/features/projects/components/ProjectSection";
 import ContactSection from "@/features/contact/components/ContactSection";
+import Socials from "@/features/socials/components/Socials";
 
 export const Route = createFileRoute("/")({
   component: App,
@@ -28,6 +29,8 @@ function App() {
       <AnimateOnScroll delay={400}>
         <ContactSection />
       </AnimateOnScroll>
+
+      <Socials />
     </main>
   );
 }

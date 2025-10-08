@@ -7,11 +7,9 @@ function AboutSection() {
       <div className="w-16 h-px bg-primary/20 mx-auto mb-8"></div>
 
       <p className="text-center text-lg text-muted-foreground mb-16 max-w-2xl mx-auto">
-        I build <span className="font-semibold text-secondary">full-stack</span> applications with{" "}
-        <span className="font-semibold text-secondary">clean code</span> and{" "}
-        <span className="font-semibold text-secondary">thoughtful architecture</span>, prioritizing{" "}
-        <span className="font-semibold text-secondary">clarity and functionality</span> over design. When I’m not
-        coding, I explore new frameworks, side projects, or find ways to simplify workflows.
+        I build full-stack applications with clean code and thoughtful architecture, prioritizing clarity and
+        functionality over design. When I’m not coding, I explore new frameworks, side projects, or find ways to
+        simplify workflows.
       </p>
 
       <Timeline />

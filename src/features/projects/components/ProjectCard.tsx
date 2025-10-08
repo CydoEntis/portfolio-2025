@@ -12,18 +12,18 @@ export function ProjectCard({ project, isReversed }: ProjectCardProps) {
   return (
     <div className={`grid md:grid-cols-2 gap-8 items-center mb-24 ${isReversed ? "md:grid-flow-dense" : ""}`}>
       <div className={`space-y-4 ${isReversed ? "md:col-start-2" : ""}`}>
-        <div className="relative aspect-video rounded-lg overflow-hidden border border-zinc-800">
+        <div className="relative aspect-video rounded-lg overflow-hidden border border-accent">
           <img src={project.image} alt={project.name} className="w-full h-full object-cover" />
         </div>
         {project.codeImage && (
-          <div className="relative aspect-video rounded-lg overflow-hidden bg-zinc-900 border border-zinc-800">
+          <div className="relative aspect-video rounded-lg overflow-hidden  border border-accent">
             <img src={project.codeImage} alt={`${project.name} code`} className="w-full h-full object-cover" />
           </div>
         )}
       </div>
 
       <div className={isReversed ? "md:col-start-1 md:row-start-1" : ""}>
-        <h3 className="text-3xl font-bold text-white mb-4">{project.name}</h3>
+        <h3 className="text-3xl font-bold text-foreground mb-4">{project.name}</h3>
 
         <div className="flex flex-wrap gap-2 mb-4">
           {project.tech.map((tag) => (
@@ -33,7 +33,7 @@ export function ProjectCard({ project, isReversed }: ProjectCardProps) {
           ))}
         </div>
 
-        <p className="text-zinc-400 leading-relaxed mb-6">{project.description}</p>
+        <p className="text-muted-foreground leading-relaxed mb-6">{project.description}</p>
 
         <div className="flex gap-3">
           {project.githubUrl && (
@@ -49,7 +49,7 @@ export function ProjectCard({ project, isReversed }: ProjectCardProps) {
             </Button>
           )}
           {project.liveUrl && (
-            <Button asChild size="lg" variant="outline" className="border-zinc-700 text-zinc-300 hover:bg-zinc-800">
+            <Button asChild size="lg" variant="outline">
               <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                 View project
                 <ArrowRight className="w-4 h-4 ml-2" />

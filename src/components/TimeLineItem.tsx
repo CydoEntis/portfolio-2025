@@ -10,8 +10,8 @@ function TimelineItem({ item }: { item: TimelineItem }) {
               <div key={index}>
                 <div className="transition-all duration-300 ease-in-out">
                   <p className="text-[.60rem] text-muted-foreground">{entry.dates}</p>
-                  <h3 className="font-bold text-lg text-foreground">{entry.title}</h3>
-                  <p className="text-sm text-secondary">{entry.location}</p>
+                  <h3 className="font-bold text-lg text-primary">{entry.title}</h3>
+                  <p className="text-sm text-foreground">{entry.location}</p>
                 </div>
                 {/* Separator line between multiple entries */}
                 {index < item.entries.filter((e) => e.side === "left").length - 1 && (
@@ -40,8 +40,8 @@ function TimelineItem({ item }: { item: TimelineItem }) {
               <div key={index}>
                 <div className="transition-all duration-300 ease-in-out">
                   <p className="text-[.60rem] text-muted-foreground">{entry.dates}</p>
-                  <h3 className="font-bold text-lg text-foreground">{entry.title}</h3>
-                  <p className="text-sm text-secondary">{entry.location}</p>
+                  <h3 className="font-bold text-lg text-primary">{entry.title}</h3>
+                  <p className="text-sm text-foreground">{entry.location}</p>
                 </div>
                 {/* Separator line between multiple entries */}
                 {index < item.entries.filter((e) => e.side === "right").length - 1 && (
