@@ -36,7 +36,8 @@ function FloatingTech() {
   }, []);
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    // Hide on mobile, show on tablet and up
+    <div className="hidden md:block absolute inset-0 overflow-hidden pointer-events-none">
       {techs.map((tech) => (
         <div
           key={tech.name}
@@ -54,7 +55,7 @@ function FloatingTech() {
               border border-primary/20 shadow-lg 
               animate-gentle-bounce
               pointer-events-auto hover:scale-110 transition-transform
-              text-base md:text-lg px-4 py-2 font-semibold
+              text-sm lg:text-base px-3 py-1.5 lg:px-4 lg:py-2 font-semibold
             "
             style={{
               animationDelay: `${tech.delay + 1.5}s`,
