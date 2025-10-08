@@ -4,6 +4,6 @@ export type Project = {
   image: string;
   codeImage?: string;
   liveUrl?: string;
-  githubUrl?: string;
+  githubLinks?: { label: string; url: string }[];
   tech: string[];
 };

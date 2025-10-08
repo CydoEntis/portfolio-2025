@@ -25,9 +25,7 @@ function ProjectCard({ project, isReversed, index }: ProjectCardProps) {
       { threshold: 0.1 }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
+    if (ref.current) observer.observe(ref.current);
 
     return () => observer.disconnect();
   }, []);
@@ -43,9 +41,14 @@ function ProjectCard({ project, isReversed, index }: ProjectCardProps) {
       `}
     >
       <div className={`space-y-4 ${isReversed ? "md:col-start-2" : ""}`}>
-        <div className="relative aspect-video rounded-lg overflow-hidden border border-accent">
-          <img src={project.image} alt={project.name} className="w-full h-full object-cover" />
+        <div className="relative aspect-video rounded-lg overflow-hidden border border-accent flex items-center justify-center bg-muted-foreground/10 text-muted-foreground">
+          {project.image ? (
+            <img src={project.image} alt={project.name} className="w-full h-full object-cover" />
+          ) : (
+            <span className="text-lg md:text-xl font-semibold">Coming Soon</span>
+          )}
         </div>
+
         {project.codeImage && (
           <div className="relative aspect-video rounded-lg overflow-hidden border border-accent">
             <img src={project.codeImage} alt={`${project.name} code`} className="w-full h-full object-cover" />
@@ -71,18 +74,20 @@ function ProjectCard({ project, isReversed, index }: ProjectCardProps) {
         <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-4 md:mb-6">{project.description}</p>
 
         <div className="flex flex-col sm:flex-row gap-3">
-          {project.githubUrl && (
+          {project.githubLinks?.map((link) => (
             <Button
+              key={link.url}
               asChild
               size="lg"
               className="w-full sm:w-auto bg-primary/10 border border-primary/20 hover:bg-primary/20 text-foreground"
             >
-              <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+              <a href={link.url} target="_blank" rel="noopener noreferrer">
                 <Github className="w-4 h-4 mr-2" />
-                View GitHub
+                {link.label}
               </a>
             </Button>
-          )}
+          ))}
+
           {project.liveUrl && (
             <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
               <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
