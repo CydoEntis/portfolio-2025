@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import HeroSection from "@/features/hero/components/HeroSection";
 import AnimateOnScroll from "@/components/AnimateOnScroll";
+import AboutSection from "@/features/about/components/AboutSection";
 
 export const Route = createFileRoute("/")({
   component: App,
@@ -14,17 +15,11 @@ function App() {
         <HeroSection />
       </AnimateOnScroll>
 
-      {/* <AnimateOnScroll delay={100}>
-        <section className="grid grid-cols-1 lg:grid-cols-2">
-          <div className="lg:sticky lg:top-0 p-2 md:p-4">
-            <Hero />
-          </div>
-          <div className="p-2 md:p-4">
-            <AboutMe />
-          </div>
-        </section>
+      <AnimateOnScroll delay={200}>
+        <AboutSection />
       </AnimateOnScroll>
 
+      {/* 
       <AnimateOnScroll delay={200}>
         <section className="grid grid-cols-1 lg:grid-cols-2">
           <div className="p-2 md:p-4">

@@ -9,7 +9,7 @@ import HeroActions from "./HeroActions";
 
 function HeroSection() {
   return (
-    <div className="min-h-screen relative bg-[#121113] flex flex-col items-center justify-center px-4 py-20">
+    <div className=" relative  flex flex-col items-center justify-center px-4 py-20">
       <GridBackground />
       <RadialFadeOverlay />
 
@@ -37,7 +37,6 @@ function HeroSection() {
             <Socials />
           </div>
         </div>
-        <Timeline />
       </div>
     </div>
   );

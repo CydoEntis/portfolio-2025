@@ -1,29 +1,22 @@
-import SectionTitle from "@/components/SectionTitle";
-import { Button } from "@/components/ui/button";
-import { User } from "lucide-react";
+import Timeline from "@/features/about/components/Timeline";
 
-function AboutMe() {
+function AboutSection() {
   return (
     <section className="space-y-8 pb-8">
-      <SectionTitle icon={<User size={20} />} title="Who Am I?" />
-      <div className="space-y-3 text-muted-foreground text-lg">
-        <p className="text-lg text-muted-foreground">
-          I'm Cody a Developer crafting minimal, effortless web experiences that just work.
-        </p>
-        <p>
-          I build full-stack applications with clean, maintainable code and thoughtful architecture, prioritizing
-          clarity and functionality over design. When I’m not coding, I explore new frameworks, side projects, or find
-          ways to simplify workflows.
-        </p>
-      </div>
+      <h2 className="text-3xl font-bold text-center mb-4 uppercase tracking-wider text-primary">About</h2>
+      <div className="w-16 h-px bg-primary/20 mx-auto mb-8"></div>
 
-      <div>
-        <Button className="px-6 py-3 rounded-sm bg-primary/10 border border-primary/20 text-white">
-          Download Resume
-        </Button>
-      </div>
+      <p className="text-center text-lg text-muted-foreground mb-16 max-w-2xl mx-auto">
+        I build <span className="font-semibold text-secondary">full-stack</span> applications with{" "}
+        <span className="font-semibold text-secondary">clean code</span> and{" "}
+        <span className="font-semibold text-secondary">thoughtful architecture</span>, prioritizing{" "}
+        <span className="font-semibold text-secondary">clarity and functionality</span> over design. When I’m not
+        coding, I explore new frameworks, side projects, or find ways to simplify workflows.
+      </p>
+
+      <Timeline />
     </section>
   );
 }
 
-export default AboutMe;
+export default AboutSection;
