@@ -1,8 +1,7 @@
-"use client";
-
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Send, X } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
   const links = [
@@ -19,13 +18,13 @@ export default function Header() {
   };
 
   return (
-    <header className="fixed top-0 w-full z-50 bg-background shadow-sm px-4 py-4 flex justify-between items-center  max-w-7xl">
+    <header className="fixed top-0 w-full z-50 bg-background shadow-sm px-4 py-4 flex justify-between items-center max-w-7xl mx-auto">
       <button onClick={() => handleNavClick("hero")} className="font-semibold flex flex-col text-sm">
         <span>Cody</span>
         <span className="ml-4">Stine</span>
       </button>
 
-      <div className="hidden md:flex items-center gap-6">
+      <div className="hidden md:flex items-center gap-4">
         {links.map((link) => (
           <button
             key={link.href}
@@ -35,6 +34,8 @@ export default function Header() {
             {link.label}
           </button>
         ))}
+
+        <ThemeToggle />
 
         <button
           onClick={() => handleNavClick("contact")}
@@ -58,9 +59,15 @@ export default function Header() {
           </div>
 
           <nav className="flex flex-col gap-4">
-            <button onClick={() => handleNavClick("about")} className="hover:text-primary transition text-left">
-              About
-            </button>
+            {links.map((link) => (
+              <button
+                key={link.href}
+                onClick={() => handleNavClick(link.href)}
+                className="hover:text-primary transition text-left"
+              >
+                {link.label}
+              </button>
+            ))}
 
             <button
               onClick={() => handleNavClick("tools")}
@@ -69,9 +76,7 @@ export default function Header() {
               Tools
             </button>
 
-            <button onClick={() => handleNavClick("projects")} className="hover:text-primary transition text-left">
-              Projects
-            </button>
+            <ThemeToggle />
 
             <button
               onClick={() => handleNavClick("contact")}
