@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Github, ArrowRight } from "lucide-react";
@@ -6,12 +7,40 @@ import type { Project } from "../types";
 interface ProjectCardProps {
   project: Project;
   isReversed: boolean;
+  index: number;
 }
 
-function ProjectCard({ project, isReversed }: ProjectCardProps) {
+function ProjectCard({ project, isReversed, index }: ProjectCardProps) {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div
-      className={`grid md:grid-cols-2 gap-6 md:gap-8 items-center mb-16 md:mb-24 ${isReversed ? "md:grid-flow-dense" : ""}`}
+      ref={ref}
+      className={`
+        grid md:grid-cols-2 gap-6 md:gap-8 items-center mb-16 md:mb-24 
+        transition-all duration-700 ease-out
+        ${isReversed ? "md:grid-flow-dense" : ""}
+        ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}
+      `}
     >
       <div className={`space-y-4 ${isReversed ? "md:col-start-2" : ""}`}>
         <div className="relative aspect-video rounded-lg overflow-hidden border border-accent">

@@ -1,10 +1,52 @@
+import { useEffect, useRef, useState } from "react";
+
+interface TimelineEntry {
+  title: string;
+  location: string;
+  dates: string;
+  side: "left" | "right";
+}
+
+interface TimelineItem {
+  year: string;
+  entries: TimelineEntry[];
+}
+
 interface TimelineItemProps {
   item: TimelineItem;
 }
 
 function TimelineItem({ item }: TimelineItemProps) {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="relative flex flex-col md:flex-row items-start mb-8 transition-all duration-300 ease-in-out">
+    <div
+      ref={ref}
+      className={`
+        relative flex flex-col md:flex-row items-start mb-8 
+        transition-all duration-700 ease-out
+        ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}
+      `}
+    >
       {/* Mobile layout - stacked */}
       <div className="md:hidden w-full space-y-4 mb-6 relative">
         {/* Vertical line for mobile - centered on dot */}

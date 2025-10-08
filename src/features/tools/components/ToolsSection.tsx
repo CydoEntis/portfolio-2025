@@ -3,7 +3,7 @@ import { technologies } from "../data/technologies";
 
 function ToolsSection() {
   return (
-    <section className="space-y-8 pb-8 px-4">
+    <section className="space-y-8 pb-8 px-4 md:hidden">
       <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-left md:text-center mb-4 uppercase tracking-wider text-primary">
         Tech Stack
       </h2>
