@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "sonner";
 import emailjs from "emailjs-com";
 
 const contactFormSchema = z.object({
@@ -44,11 +45,15 @@ export function ContactForm() {
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
 
-      alert("✅ Message sent successfully!");
+      toast.success("Message sent successfully! 🚀", {
+        description: "I'll get back to you soon.",
+      });
       form.reset();
     } catch (error) {
       console.error("Email send error:", error);
-      alert("❌ Failed to send message. Please try again.");
+      toast.error("Failed to send message ❌", {
+        description: "Please try again later.",
+      });
     }
   }
 

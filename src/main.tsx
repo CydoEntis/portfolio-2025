@@ -8,6 +8,7 @@ import { routeTree } from "./routeTree.gen";
 import "./styles.css";
 import reportWebVitals from "./reportWebVitals.ts";
 import { ThemeProvider } from "./components/ThemeProvider.tsx";
+import { Toaster } from "sonner";
 
 // Create a new router instance
 const router = createRouter({
@@ -36,6 +37,7 @@ if (rootElement && !rootElement.innerHTML) {
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <div id="root">
           <RouterProvider router={router} />
+          <Toaster richColors position="top-right"/>
         </div>
       </ThemeProvider>
     </StrictMode>
