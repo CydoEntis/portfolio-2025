@@ -9,10 +9,16 @@ function HeroActions() {
 
   return (
     <div className="flex justify-center items-center gap-2">
-      <Button className="bg-primary/10 border border-primary/30 hover:bg-primary/30 text-foreground font-semibold px-8 py-3 rounded-md transition-colors">
-        <Download /> Resume
-      </Button>
-      <Button onClick={() => handleNavClick("projects")} className="bg-primary/10 border border-primary/30 hover:bg-primary/30 text-foreground font-semibold px-8 py-3 rounded-md transition-colors">
+      <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+        <Button className="bg-primary/10 border border-primary/30 hover:bg-primary/30 text-foreground font-semibold px-8 py-3 rounded-md transition-colors">
+          <Download /> Resume
+        </Button>
+      </a>
+
+      <Button
+        onClick={() => handleNavClick("projects")}
+        className="bg-primary/10 border border-primary/30 hover:bg-primary/30 text-foreground font-semibold px-8 py-3 rounded-md transition-colors"
+      >
         <Folder /> View Work
       </Button>
     </div>
