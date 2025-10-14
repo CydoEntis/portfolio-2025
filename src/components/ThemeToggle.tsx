@@ -29,7 +29,7 @@ function ThemeToggle() {
       variant="outline"
       size="icon"
       onClick={handleToggle}
-      className="transition-colors !bg-primary/10 !border-primary/20"
+      className="transition-colors !bg-primary/10 !border-primary/20 rounded-sm hover:!bg-primary/30"
     >
       {isDark ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
       <span className="sr-only">Toggle theme</span>

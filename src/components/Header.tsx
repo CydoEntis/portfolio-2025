@@ -19,17 +19,17 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 w-full z-50 bg-background shadow-sm px-4 py-4 flex justify-between items-center max-w-7xl mx-auto">
-      <button onClick={() => handleNavClick("hero")} className="font-semibold flex flex-col text-sm">
+      <button onClick={() => handleNavClick("hero")} className="font-semibold flex flex-col text-sm cursor-pointer">
         <span>Cody</span>
         <span className="ml-4">Stine</span>
       </button>
 
-      <div className="hidden md:flex items-center gap-4">
+      <div className="hidden md:flex items-center gap-4 cursor-pointer">
         {links.map((link) => (
           <button
             key={link.href}
             onClick={() => handleNavClick(link.href)}
-            className="hover:text-primary transition-colors"
+            className="hover:text-primary transition-colors cursor-pointer"
           >
             {link.label}
           </button>
@@ -37,7 +37,7 @@ export default function Header() {
 
         <button
           onClick={() => handleNavClick("contact")}
-          className="ml-6 px-4 py-2 bg-primary/10 border border-primary/20 text-foreground rounded-sm justify-center flex items-center gap-2 hover:bg-primary/90 transition"
+          className="ml-6 px-4 py-1.5 bg-primary/10 border border-primary/20 text-foreground rounded-sm justify-center flex items-center gap-2 hover:bg-primary/30 transition cursor-pointe"
         >
           Get In Touch <Send size={16} />
         </button>
@@ -58,12 +58,12 @@ export default function Header() {
             </button>
           </div>
 
-          <nav className="flex flex-col gap-4">
+          <nav className="flex flex-col gap-4 ">
             {links.map((link) => (
               <button
                 key={link.href}
                 onClick={() => handleNavClick(link.href)}
-                className="hover:text-primary transition text-left"
+                className="hover:text-primary transition text-left cursor-pointer"
               >
                 {link.label}
               </button>
@@ -71,7 +71,7 @@ export default function Header() {
 
             <button
               onClick={() => handleNavClick("tools")}
-              className="hover:text-primary transition text-left md:hidden"
+              className="hover:text-primary transition text-left md:hidden cursor-pointer"
             >
               Tools
             </button>
@@ -80,7 +80,7 @@ export default function Header() {
 
             <button
               onClick={() => handleNavClick("contact")}
-              className="mt-6 px-4 py-2 bg-primary/10 border border-primary/20 text-foreground rounded-sm justify-center flex items-center gap-2 hover:bg-primary/90 transition"
+              className="mt-6 px-4 py-2 bg-primary/10 border border-primary/20 text-foreground rounded-sm justify-center flex items-center gap-2 hover:bg-primary/30 transition curso-pointer"
             >
               Get In Touch <Send size={16} />
             </button>
