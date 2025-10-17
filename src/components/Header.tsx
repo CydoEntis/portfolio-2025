@@ -18,7 +18,7 @@ export default function Header() {
   };
 
   return (
-    <header className="fixed top-0 w-full z-50 bg-background shadow-sm px-4 py-4 flex justify-between items-center max-w-7xl mx-auto">
+    <header className="fixed top-0 w-full z-50 bg-background  px-4 py-4 flex justify-between items-center max-w-7xl mx-auto">
       <button onClick={() => handleNavClick("hero")} className="font-semibold flex flex-col text-sm cursor-pointer">
         <span>Cody</span>
         <span className="ml-4">Stine</span>
