@@ -7,7 +7,7 @@ import Header from "../components/Header";
 export const Route = createRootRoute({
   component: () => (
     <div className="mx-auto min-h-screen max-w-7xl">
-      <Header />
+      {/* <Header /> */}
 
       <Outlet />
 
