@@ -1,48 +1,107 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Send, X } from "lucide-react";
-import ThemeToggle from "./ThemeToggle";
+import { Menu, X } from "lucide-react";
 
 export default function Header() {
   const links = [
-    { label: "About", href: "about" },
-    { label: "Projects", href: "projects" },
+    { label: "ABOUT", href: "about" },
+    { label: "EXPERIENCE", href: "experience" },
+    { label: "PROJECTS", href: "projects" },
+    { label: "CONTACT", href: "contact" },
   ];
 
   const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("about");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = links.map((link) => link.href);
+
+      // Check if we're near the bottom of the page
+      const isNearBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100;
+
+      // If near bottom, always show contact as active
+      if (isNearBottom) {
+        setActiveSection("contact");
+        return;
+      }
+
+      // Find the section that's currently most visible in the viewport
+      let currentSection = sections[0];
+      let minDistance = Infinity;
+
+      sections.forEach((section) => {
+        const el = document.getElementById(section);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          // Calculate distance from top of viewport
+          const distance = Math.abs(rect.top);
+
+          // For contact section, trigger much earlier (when it enters viewport)
+          // For other sections, trigger at 50%
+          const threshold =
+            section === "contact" ? window.innerHeight * 0.9 : window.innerHeight / 2;
+
+          // If this section is in view and closer to the top, update current section
+          if (rect.top <= threshold && distance < minDistance) {
+            minDistance = distance;
+            currentSection = section;
+          }
+        }
+      });
+
+      setActiveSection(currentSection);
+    };
+
+    // Initial check
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleNavClick = (id: string) => {
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+      // Immediately update active section when clicking
+      setActiveSection(id);
+    }
     setOpen(false);
   };
 
   return (
-    <header className="fixed top-0 w-full z-50 bg-background  px-4 py-4 flex justify-between items-center max-w-7xl mx-auto">
-      <button onClick={() => handleNavClick("hero")} className="font-semibold flex flex-col text-sm cursor-pointer">
-        <span>Cody</span>
-        <span className="ml-4">Stine</span>
-      </button>
-
-      <div className="hidden md:flex items-center gap-4 cursor-pointer">
+    <header className="">
+      <div className="hidden md:flex md:flex-col gap-6 cursor-pointer">
         {links.map((link) => (
           <button
             key={link.href}
             onClick={() => handleNavClick(link.href)}
-            className="hover:text-primary transition-colors cursor-pointer"
+            className={`flex items-center gap-3 group transition-all duration-300 ${
+              activeSection === link.href ? "text-foreground" : "text-muted-foreground/80"
+            }`}
           >
-            {link.label}
+            <span
+              className={`h-[1px] transition-all duration-300 ${
+                activeSection === link.href
+                  ? "w-16 bg-primary"
+                  : "w-8 bg-muted-foreground/80 group-hover:w-12 group-hover:bg-primary/80"
+              }`}
+            />
+            <span className="text-xs font-medium tracking-wider group-hover:text-foreground/80">{link.label}</span>
           </button>
         ))}
 
-        <button
+        {/* <Button
+          variant="outline"
           onClick={() => handleNavClick("contact")}
-          className="ml-6 px-4 py-1.5 bg-primary/10 border border-primary/20 text-foreground rounded-sm justify-center flex items-center gap-2 hover:bg-primary/30 transition cursor-pointe"
+          className="ml-6 px-4 py-1.5 bg-primary/10 border border-primary/20 text-foreground rounded-sm justify-center flex items-center gap-2 hover:bg-primary/30 transition cursor-pointer"
         >
           Get In Touch <Send size={16} />
-        </button>
-        
-        <ThemeToggle />
+        </Button> */}
+
+        {/* <ThemeToggle /> */}
       </div>
 
       <Sheet open={open} onOpenChange={setOpen}>
@@ -58,32 +117,25 @@ export default function Header() {
             </button>
           </div>
 
-          <nav className="flex flex-col gap-4 ">
+          <nav className="flex flex-col gap-6 ">
             {links.map((link) => (
               <button
                 key={link.href}
                 onClick={() => handleNavClick(link.href)}
-                className="hover:text-primary transition text-left cursor-pointer"
+                className={`flex items-center gap-3 group transition-all duration-300 ${
+                  activeSection === link.href ? "text-foreground" : "text-muted-foreground/40"
+                }`}
               >
-                {link.label}
+                <span
+                  className={`h-[1px] transition-all duration-300 ${
+                    activeSection === link.href
+                      ? "w-16 bg-primary"
+                      : "w-8 bg-muted-foreground/40 group-hover:w-12 group-hover:bg-primary/60"
+                  }`}
+                />
+                <span className="text-xs font-medium tracking-wider group-hover:text-foreground/80">{link.label}</span>
               </button>
             ))}
-
-            <button
-              onClick={() => handleNavClick("tools")}
-              className="hover:text-primary transition text-left md:hidden cursor-pointer"
-            >
-              Tools
-            </button>
-
-            <ThemeToggle />
-
-            <button
-              onClick={() => handleNavClick("contact")}
-              className="mt-6 px-4 py-2 bg-primary/10 border border-primary/20 text-foreground rounded-sm justify-center flex items-center gap-2 hover:bg-primary/30 transition curso-pointer"
-            >
-              Get In Touch <Send size={16} />
-            </button>
           </nav>
         </SheetContent>
       </Sheet>
