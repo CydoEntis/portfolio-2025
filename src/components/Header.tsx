@@ -18,8 +18,7 @@ export default function Header() {
       const sections = links.map((link) => link.href);
 
       // Check if we're near the bottom of the page
-      const isNearBottom =
-        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100;
+      const isNearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100;
 
       // If near bottom, always show contact as active
       if (isNearBottom) {
@@ -40,8 +39,7 @@ export default function Header() {
 
           // For contact section, trigger much earlier (when it enters viewport)
           // For other sections, trigger at 50%
-          const threshold =
-            section === "contact" ? window.innerHeight * 0.9 : window.innerHeight / 2;
+          const threshold = section === "contact" ? window.innerHeight * 0.9 : window.innerHeight / 2;
 
           // If this section is in view and closer to the top, update current section
           if (rect.top <= threshold && distance < minDistance) {
@@ -92,16 +90,6 @@ export default function Header() {
             <span className="text-xs font-medium tracking-wider group-hover:text-foreground/80">{link.label}</span>
           </button>
         ))}
-
-        {/* <Button
-          variant="outline"
-          onClick={() => handleNavClick("contact")}
-          className="ml-6 px-4 py-1.5 bg-primary/10 border border-primary/20 text-foreground rounded-sm justify-center flex items-center gap-2 hover:bg-primary/30 transition cursor-pointer"
-        >
-          Get In Touch <Send size={16} />
-        </Button> */}
-
-        {/* <ThemeToggle /> */}
       </div>
 
       <Sheet open={open} onOpenChange={setOpen}>

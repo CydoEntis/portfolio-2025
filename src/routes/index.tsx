@@ -98,7 +98,7 @@ function App() {
 
           {/* Experience Section */}
           <section id="experience" className="scroll-mt-16">
-            <SectionHeader title="Experience" />
+            <SectionHeader title="Experience" showResumeLink={true} />
             <div className="space-y-12">
               {experienceData.map((item, index) => (
                 <ExperienceCard key={index} item={item} />
