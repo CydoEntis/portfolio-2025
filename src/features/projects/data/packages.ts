@@ -24,4 +24,12 @@ export const packages: Package[] = [
     tech: ["C#", ".NET", "ASP.NET Core", "Entity Framework Core"],
     image: "/SuccessHound.png",
   },
+  {
+    name: "Pawthorize",
+    description:
+      "Modern, secure authentication library for ASP.NET Core. Provides complete auth flows including JWT token management, password handling, session management, CSRF protection, role-based authorization, email verification, and password reset out of the box. Designed to get you up and running quickly with Minimal APIs.",
+    githubUrl: "https://github.com/CydoEntis/Pawthorize",
+    tech: ["C#", ".NET", "ASP.NET Core", "JWT", "BCrypt", "FluentValidation"],
+    image: "/Pawthorize.png",
+  },
 ];
