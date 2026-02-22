@@ -1,8 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
@@ -42,16 +41,16 @@ export function ContactForm() {
           email: data.email,
           message: data.message,
         },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
       );
 
-      toast.success("Message sent successfully! 🚀", {
+      toast.success("Message sent successfully!", {
         description: "I'll get back to you soon.",
       });
       form.reset();
     } catch (error) {
       console.error("Email send error:", error);
-      toast.error("Failed to send message ❌", {
+      toast.error("Failed to send message", {
         description: "Please try again later.",
       });
     }
@@ -59,52 +58,63 @@ export function ContactForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input
-                  placeholder="Name"
-                  className="bg-input border-primary/20 text-foreground placeholder:text-muted-foreground"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3.5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="font-mono text-[11px] font-medium text-muted-foreground tracking-[0.06em] uppercase">
+                  Name
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Your name"
+                    className="bg-input border-glass-border text-foreground rounded-lg transition-all focus:border-primary focus:shadow-[0_0_0_3px_var(--accent-glow)]"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input
-                  type="email"
-                  placeholder="Email"
-                  className="bg-input border-primary/20 text-foreground placeholder:text-muted-foreground"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="font-mono text-[11px] font-medium text-muted-foreground tracking-[0.06em] uppercase">
+                  Email
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    type="email"
+                    placeholder="your@email.com"
+                    className="bg-input border-glass-border text-foreground rounded-lg transition-all focus:border-primary focus:shadow-[0_0_0_3px_var(--accent-glow)]"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
 
         <FormField
           control={form.control}
           name="message"
           render={({ field }) => (
             <FormItem>
+              <FormLabel className="font-mono text-[11px] font-medium text-muted-foreground tracking-[0.06em] uppercase">
+                Message
+              </FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Message"
-                  rows={6}
-                  className="bg-input border-primary/20 text-foreground placeholder:text-muted-foreground"
+                  placeholder="Tell me about your project or opportunity"
+                  rows={5}
+                  className="bg-input border-glass-border text-foreground rounded-lg resize-y transition-all focus:border-primary focus:shadow-[0_0_0_3px_var(--accent-glow)]"
                   {...field}
                 />
               </FormControl>
@@ -113,14 +123,23 @@ export function ContactForm() {
           )}
         />
 
-        <Button
+        <button
           type="submit"
-          size="lg"
-          className="bg-primary/10 border border-primary/20 hover:bg-primary/20 text-foreground"
           disabled={form.formState.isSubmitting}
+          className="cursor-pointer inline-flex items-center gap-2 px-[26px] py-3 rounded-lg text-[13.5px] font-medium text-white transition-all disabled:opacity-50"
+          style={{
+            background: "linear-gradient(135deg, var(--primary), var(--primary))",
+            boxShadow: "0 2px 12px var(--accent-glow)",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.boxShadow = "0 4px 20px var(--accent-glow-strong)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.boxShadow = "0 2px 12px var(--accent-glow)";
+          }}
         >
-          {form.formState.isSubmitting ? "Sending..." : "Submit"}
-        </Button>
+          {form.formState.isSubmitting ? "Sending..." : "Send Message →"}
+        </button>
       </form>
     </Form>
   );
