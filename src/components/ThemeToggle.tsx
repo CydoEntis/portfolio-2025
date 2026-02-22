@@ -1,40 +1,28 @@
-import { Sun, Moon } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { useTheme } from "./ThemeProvider";
 
-function ThemeToggle() {
+export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
 
   const isDark =
     theme === "dark" ||
-    (theme === "system" && typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
 
-  const handleToggle = () => {
-    const nextTheme = isDark ? "light" : "dark";
-    const root = document.getElementById("root");
-
-    if (root && document.startViewTransition) {
-      document.startViewTransition(() => {
-        setTheme(nextTheme);
-
-        root.dataset.theme = nextTheme;
-      });
+  const toggle = () => {
+    const next = isDark ? "light" : "dark";
+    if (document.startViewTransition) {
+      document.startViewTransition(() => setTheme(next));
     } else {
-      setTheme(nextTheme);
+      setTheme(next);
     }
   };
 
   return (
-    <Button
-      variant="outline"
-      size="icon"
-      onClick={handleToggle}
-      className="transition-colors !bg-primary/10 !border-primary/20 rounded-sm hover:!bg-primary/30"
+    <button
+      onClick={toggle}
+      className="w-[34px] h-[34px] rounded-lg border border-glass-border bg-glass backdrop-blur-[8px] cursor-pointer flex items-center justify-center transition-all text-mid text-[15px] hover:border-[var(--border-hover,var(--glass-border))] hover:bg-glass-hover"
+      aria-label="Toggle dark mode"
     >
-      {isDark ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
-      <span className="sr-only">Toggle theme</span>
-    </Button>
+      {isDark ? "☀" : "☾"}
+    </button>
   );
 }
-
-export default ThemeToggle;
