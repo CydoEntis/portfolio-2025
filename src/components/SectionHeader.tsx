@@ -1,33 +1,31 @@
+import type { ReactNode } from "react";
+
 type SectionHeaderProps = {
+  label: string;
   title: string;
-  showResumeLink?: boolean;
+  subtitle?: string;
+  rightContent?: ReactNode;
 };
 
-function SectionHeader({ title, showResumeLink = false }: SectionHeaderProps) {
+function SectionHeader({ label, title, subtitle, rightContent }: SectionHeaderProps) {
   return (
-    <>
-      <div className="lg:flex items-center justify-between mb-8 hidden">
-        <h2 className="text-lg font-bold tracking-widest text-primary uppercase">
-          {title}
-        </h2>
-        {showResumeLink && (
-          <a
-            href="/resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 group transition-all duration-300 text-muted-foreground/80"
-          >
-            <span className="text-xs font-medium tracking-wider group-hover:text-foreground transition-colors">
-              View Resume
-            </span>
-            <span className="h-[1px] w-8 bg-muted-foreground/80 group-hover:w-16 group-hover:bg-primary transition-all duration-300" />
-          </a>
+    <div className="mb-6">
+      <div className="flex items-center justify-between mb-1.5">
+        <div className="flex items-center gap-2.5">
+          <div className="w-3.5 h-[1.5px] bg-primary rounded-sm" />
+          <span className="font-mono text-[11px] font-medium text-primary tracking-[0.1em] uppercase">
+            {label}
+          </span>
+        </div>
+        {rightContent && (
+          <span className="text-xs text-muted-foreground">{rightContent}</span>
         )}
       </div>
-      <h2 className="lg:hidden text-sm font-bold tracking-widest text-foreground mb-6 sticky top-0 z-10 bg-background/95 backdrop-blur py-4 -mx-4 px-4">
-        {title.toUpperCase()}
-      </h2>
-    </>
+      <h2 className="text-[26px] font-semibold text-foreground tracking-tight">{title}</h2>
+      {subtitle && (
+        <p className="mt-1.5 text-[14.5px] text-muted-foreground">{subtitle}</p>
+      )}
+    </div>
   );
 }
 

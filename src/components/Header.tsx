@@ -1,47 +1,44 @@
 import { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, X } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
+
+const links = [
+  { label: "Stack", href: "stack" },
+  { label: "Journey", href: "journey" },
+  { label: "Projects", href: "projects" },
+  { label: "Contact", href: "contact" },
+];
 
 export default function Header() {
-  const links = [
-    { label: "ABOUT", href: "about" },
-    { label: "EXPERIENCE", href: "experience" },
-    { label: "PROJECTS", href: "projects" },
-    { label: "CONTACT", href: "contact" },
-  ];
-
   const [open, setOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("about");
+  const [activeSection, setActiveSection] = useState("home");
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = links.map((link) => link.href);
+      setScrolled(window.scrollY > 32);
 
-      // Check if we're near the bottom of the page
-      const isNearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100;
+      const allSections = ["home", ...links.map((link) => link.href)];
+      const isNearBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100;
 
-      // If near bottom, always show contact as active
       if (isNearBottom) {
         setActiveSection("contact");
         return;
       }
 
-      // Find the section that's currently most visible in the viewport
-      let currentSection = sections[0];
+      let currentSection = allSections[0];
       let minDistance = Infinity;
 
-      sections.forEach((section) => {
+      allSections.forEach((section) => {
         const el = document.getElementById(section);
         if (el) {
           const rect = el.getBoundingClientRect();
-          // Calculate distance from top of viewport
           const distance = Math.abs(rect.top);
+          const threshold =
+            section === "contact" ? window.innerHeight * 0.9 : window.innerHeight / 2;
 
-          // For contact section, trigger much earlier (when it enters viewport)
-          // For other sections, trigger at 50%
-          const threshold = section === "contact" ? window.innerHeight * 0.9 : window.innerHeight / 2;
-
-          // If this section is in view and closer to the top, update current section
           if (rect.top <= threshold && distance < minDistance) {
             minDistance = distance;
             currentSection = section;
@@ -52,9 +49,7 @@ export default function Header() {
       setActiveSection(currentSection);
     };
 
-    // Initial check
     handleScroll();
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -63,70 +58,85 @@ export default function Header() {
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
-      // Immediately update active section when clicking
       setActiveSection(id);
     }
     setOpen(false);
   };
 
   return (
-    <header className="">
-      <div className="hidden md:flex md:flex-col gap-6 cursor-pointer">
-        {links.map((link) => (
-          <button
-            key={link.href}
-            onClick={() => handleNavClick(link.href)}
-            className={`flex items-center gap-3 group transition-all duration-300 ${
-              activeSection === link.href ? "text-foreground" : "text-muted-foreground/80"
-            }`}
-          >
-            <span
-              className={`h-[1px] transition-all duration-300 ${
-                activeSection === link.href
-                  ? "w-16 bg-primary"
-                  : "w-8 bg-muted-foreground/80 group-hover:w-12 group-hover:bg-primary/80"
-              }`}
-            />
-            <span className="text-xs font-medium tracking-wider group-hover:text-foreground/80">{link.label}</span>
-          </button>
-        ))}
-      </div>
+    <header
+      className="fixed top-0 left-0 right-0 z-[100] transition-all duration-300"
+      style={{
+        background: scrolled ? "var(--nav-bg)" : "transparent",
+        backdropFilter: scrolled ? "blur(16px)" : "none",
+        borderBottom: scrolled
+          ? "1px solid var(--border)"
+          : "1px solid transparent",
+      }}
+    >
+      <div className="mx-auto max-w-[760px] px-7 flex items-center justify-between h-14">
+        <button
+          onClick={() => handleNavClick("home")}
+          className="cursor-pointer font-mono text-sm font-semibold"
+        >
+          <span className="text-muted-foreground">~/</span>
+          <span className="text-primary">cody-stine</span>
+        </button>
 
-      <Sheet open={open} onOpenChange={setOpen}>
-        <SheetTrigger className="md:hidden p-2 rounded hover:bg-muted transition">
-          <Menu size={24} />
-        </SheetTrigger>
-
-        <SheetContent side="right" className="w-64 p-8 bg-background shadow-xl border-l border-primary/20">
-          <div className="flex justify-between items-center mb-8">
-            <span className="font-bold text-xl">Menu</span>
-            <button onClick={() => setOpen(false)} className="p-2 rounded hover:bg-muted transition">
-              <X size={24} />
-            </button>
-          </div>
-
-          <nav className="flex flex-col gap-6 ">
+        <div className="hidden md:flex items-center gap-6">
+          <nav className="flex items-center gap-6">
             {links.map((link) => (
               <button
                 key={link.href}
                 onClick={() => handleNavClick(link.href)}
-                className={`flex items-center gap-3 group transition-all duration-300 ${
-                  activeSection === link.href ? "text-foreground" : "text-muted-foreground/40"
+                className={`cursor-pointer text-[13px] transition-colors ${
+                  activeSection === link.href
+                    ? "text-foreground font-medium"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
               >
-                <span
-                  className={`h-[1px] transition-all duration-300 ${
-                    activeSection === link.href
-                      ? "w-16 bg-primary"
-                      : "w-8 bg-muted-foreground/40 group-hover:w-12 group-hover:bg-primary/60"
-                  }`}
-                />
-                <span className="text-xs font-medium tracking-wider group-hover:text-foreground/80">{link.label}</span>
+                {link.label}
               </button>
             ))}
           </nav>
-        </SheetContent>
-      </Sheet>
+          <ThemeToggle />
+        </div>
+
+        <div className="flex md:hidden items-center gap-2">
+          <ThemeToggle />
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger className="cursor-pointer p-1.5 rounded hover:bg-glass transition">
+              <Menu size={20} />
+            </SheetTrigger>
+            <SheetContent side="right" className="w-64 p-8 bg-background border-l border-border">
+              <div className="flex justify-between items-center mb-8">
+                <span className="font-bold text-lg">Menu</span>
+                <button
+                  onClick={() => setOpen(false)}
+                  className="p-2 rounded hover:bg-glass transition"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+              <nav className="flex flex-col gap-4">
+                {links.map((link) => (
+                  <button
+                    key={link.href}
+                    onClick={() => handleNavClick(link.href)}
+                    className={`text-left text-sm transition-colors ${
+                      activeSection === link.href
+                        ? "text-foreground font-medium"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {link.label}
+                  </button>
+                ))}
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </div>
     </header>
   );
 }
