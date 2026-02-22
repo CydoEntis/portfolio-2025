@@ -1,9 +1,7 @@
-export type Project = {
+export type ProjectItem = {
   name: string;
   description: string;
-  image: string;
-  codeImage?: string;
-  liveUrl?: string;
-  githubLinks?: { label: string; url: string }[];
   tech: string[];
+  githubLinks?: { label: string; url: string }[];
+  liveUrl?: string;
 };
