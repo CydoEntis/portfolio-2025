@@ -3,14 +3,7 @@ import type { TimelineEntry } from "../types";
 export const timeline: TimelineEntry[] = [
   {
     type: "work",
-    dateRange: "Apr 2024 — Aug 2024",
-    title: "Full Stack Developer",
-    company: "Drive Smart",
-    companyUrl: "https://www.drivesmart.auto",
-  },
-  {
-    type: "work",
-    dateRange: "Apr 2023 — Apr 2024",
+    dateRange: "Apr 2023 — Aug 2024",
     title: "Full Stack Developer",
     company: "Drive Smart",
     companyUrl: "https://www.drivesmart.auto",

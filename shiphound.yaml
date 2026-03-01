@@ -1,0 +1,12 @@
+project: portfolio-2025
+
+vps:
+  host: 192.168.1.243
+  user: cydo
+  sshKey: ~/.ssh/id_ed25519_deploy
+
+frontend:
+  path: ./
+  domain: codystine.com
+  build: npm run build
+  output: dist
